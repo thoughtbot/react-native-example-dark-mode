@@ -1,21 +1,31 @@
 import {
   AccessibilityRole,
   StyleSheet,
-  Text,
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
-import theme from '../util/theme';
+import useThemeContext from 'src/util/useThemeContext';
+import theme from '../util/theme/theme';
+import BodyText from './BodyText';
 
 type Props = TouchableOpacityProps & {
   accessibilityRole: AccessibilityRole;
 };
 
 export default function PrimaryButton({ children, style, ...props }: Props) {
+  const { colors } = useThemeContext();
+
   return (
-    <TouchableOpacity style={[styles.button, style]} {...props}>
+    <TouchableOpacity
+      style={[
+        styles.button,
+        { backgroundColor: colors.backgrounds.primary },
+        style,
+      ]}
+      {...props}
+    >
       {typeof children === 'string' ? (
-        <Text style={styles.text}>{children}</Text>
+        <BodyText style={styles.text}>{children}</BodyText>
       ) : (
         children
       )}
@@ -25,14 +35,11 @@ export default function PrimaryButton({ children, style, ...props }: Props) {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: theme.colors.backgrounds.primary,
     borderRadius: theme.radius.default,
-    color: theme.colors.white,
     paddingHorizontal: theme.gaps.button.horizontal,
     paddingVertical: theme.gaps.button.vertical,
   },
   text: {
-    color: theme.colors.white,
     fontSize: 16,
     fontWeight: '600',
     lineHeight: 21,

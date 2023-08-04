@@ -1,17 +1,22 @@
 import { StyleSheet, Text, TextProps } from 'react-native';
-import theme from 'src/util/theme';
+import useThemeContext from 'src/util/useThemeContext';
 
 type Props = TextProps;
 
 export default function Heading({ style, ...props }: Props) {
+  const { colors } = useThemeContext();
+
   return (
-    <Text accessibilityRole="header" style={[styles.text, style]} {...props} />
+    <Text
+      accessibilityRole="header"
+      style={[styles.text, { color: colors.grayscale1 }, style]}
+      {...props}
+    />
   );
 }
 
 const styles = StyleSheet.create({
   text: {
-    color: theme.colors.dark2,
     fontSize: 21,
     lineHeight: 28,
     fontWeight: '600',

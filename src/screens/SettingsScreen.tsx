@@ -1,15 +1,33 @@
-import { useState } from 'react';
 import { StyleSheet, Switch, View } from 'react-native';
 import BodyText from 'src/components/BodyText';
 import Heading from 'src/components/Heading';
-import theme from 'src/util/theme';
+import theme from 'src/util/theme/theme';
+import useThemeContext from 'src/util/useThemeContext';
 
 export default function SettingsScreen() {
-  const [colorTheme, setColorTheme] = useState<'light' | 'dark'>('light');
+  const { colors, isSystemTheme, systemTheme, colorTheme, setColorTheme } =
+    useThemeContext();
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: colors.backgrounds.grayscale5 },
+      ]}
+    >
       <View style={styles.heading}>
-        <Heading style={styles.headingText}>Dark Mode</Heading>
+        <Heading
+          style={[
+            styles.headingText,
+            { color: colors.grayscale1, borderColor: colors.grayscale2 },
+          ]}
+        >
+          Dark Mode
+        </Heading>
+        <BodyText style={{ color: colors.grayscale1 }}>
+          System: {isSystemTheme.toString()}. Theme:{' '}
+          {JSON.stringify(colorTheme)}
+        </BodyText>
       </View>
       <View style={styles.row}>
         <BodyText style={styles.label}>
@@ -17,22 +35,27 @@ export default function SettingsScreen() {
         </BodyText>
         <Switch
           trackColor={{
-            false: theme.colors.backgrounds.dark1,
-            true: theme.colors.backgrounds.dark2,
+            false: colors.backgrounds.grayscale1,
+            true: colors.backgrounds.grayscale2,
           }}
-          thumbColor={theme.colors.white}
-          onValueChange={(on) => setColorTheme(on ? 'dark' : 'light')}
-          value={colorTheme === 'dark'}
+          thumbColor={colors.grayscale5}
+          onValueChange={(on) => setColorTheme(on ? null : systemTheme)}
+          value={isSystemTheme}
         />
       </View>
       <View style={styles.row}>
-        <BodyText style={styles.label}>Dark Mode</BodyText>
+        <BodyText
+          style={[styles.label, isSystemTheme && { color: colors.grayscale2 }]}
+        >
+          Dark Mode
+        </BodyText>
         <Switch
           trackColor={{
-            false: theme.colors.backgrounds.dark1,
-            true: theme.colors.backgrounds.dark2,
+            false: colors.backgrounds.grayscale1,
+            true: colors.backgrounds.grayscale2,
           }}
-          thumbColor={theme.colors.white}
+          disabled={isSystemTheme}
+          thumbColor={colors.grayscale5}
           onValueChange={(on) => setColorTheme(on ? 'dark' : 'light')}
           value={colorTheme === 'dark'}
         />
@@ -50,12 +73,10 @@ const styles = StyleSheet.create({
   },
   heading: {
     borderBottomWidth: 1,
-    borderColor: theme.colors.dark4,
     marginBottom: theme.gaps.g12,
   },
   headingText: {
     borderBottomWidth: 1,
-    borderColor: theme.colors.dark2,
   },
   row: {
     flexDirection: 'row',
