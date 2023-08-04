@@ -25,7 +25,9 @@ export default function PrimaryButton({ children, style, ...props }: Props) {
       {...props}
     >
       {typeof children === 'string' ? (
-        <BodyText style={styles.text}>{children}</BodyText>
+        <BodyText style={[styles.text, { color: colors.textLight }]}>
+          {children}
+        </BodyText>
       ) : (
         children
       )}

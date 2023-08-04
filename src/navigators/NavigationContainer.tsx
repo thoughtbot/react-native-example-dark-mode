@@ -16,9 +16,9 @@ export default function NavigationContainer({ children }: Props) {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      text: colors.grayscale1,
-      background: colors.backgrounds.grayscale5,
-      primary: colors.grayscale1,
+      text: colors.text,
+      background: colors.backgrounds.default,
+      primary: colors.text,
     },
   };
 

@@ -12,22 +12,13 @@ export default function SettingsScreen() {
     <View
       style={[
         styles.container,
-        { backgroundColor: colors.backgrounds.grayscale5 },
+        { backgroundColor: colors.backgrounds.default },
       ]}
     >
-      <View style={styles.heading}>
-        <Heading
-          style={[
-            styles.headingText,
-            { color: colors.grayscale1, borderColor: colors.grayscale2 },
-          ]}
-        >
+      <View style={[styles.heading, { borderColor: colors.textMuted }]}>
+        <Heading style={[styles.headingText, { color: colors.text }]}>
           Dark Mode
         </Heading>
-        <BodyText style={{ color: colors.grayscale1 }}>
-          System: {isSystemTheme.toString()}. Theme:{' '}
-          {JSON.stringify(colorTheme)}
-        </BodyText>
       </View>
       <View style={styles.row}>
         <BodyText style={styles.label}>
@@ -35,27 +26,29 @@ export default function SettingsScreen() {
         </BodyText>
         <Switch
           trackColor={{
-            false: colors.backgrounds.grayscale1,
-            true: colors.backgrounds.grayscale2,
+            false: colors.backgrounds.soft,
+            true: colors.backgrounds.strong,
           }}
-          thumbColor={colors.grayscale5}
+          ios_backgroundColor={colors.backgrounds.soft}
+          thumbColor={colors.backgrounds.default}
           onValueChange={(on) => setColorTheme(on ? null : systemTheme)}
           value={isSystemTheme}
         />
       </View>
       <View style={styles.row}>
         <BodyText
-          style={[styles.label, isSystemTheme && { color: colors.grayscale2 }]}
+          style={[styles.label, isSystemTheme && { color: colors.textMuted }]}
         >
           Dark Mode
         </BodyText>
         <Switch
           trackColor={{
-            false: colors.backgrounds.grayscale1,
-            true: colors.backgrounds.grayscale2,
+            false: colors.backgrounds.soft,
+            true: colors.backgrounds.strong,
           }}
           disabled={isSystemTheme}
-          thumbColor={colors.grayscale5}
+          ios_backgroundColor={colors.backgrounds.soft}
+          thumbColor={colors.backgrounds.default}
           onValueChange={(on) => setColorTheme(on ? 'dark' : 'light')}
           value={colorTheme === 'dark'}
         />
@@ -67,7 +60,6 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     paddingVertical: theme.gaps.g24,
     paddingHorizontal: theme.gaps.screen.horizontal,
   },

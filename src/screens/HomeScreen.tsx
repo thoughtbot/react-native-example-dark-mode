@@ -14,7 +14,7 @@ export default function HomeScreen() {
     <View
       style={[
         styles.container,
-        { backgroundColor: colors.backgrounds.grayscale5 },
+        { backgroundColor: colors.backgrounds.default },
       ]}
     >
       <Heading style={styles.heading}>Welcome to the app!</Heading>

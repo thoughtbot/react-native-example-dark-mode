@@ -9,7 +9,7 @@ export default function Heading({ style, ...props }: Props) {
   return (
     <Text
       accessibilityRole="header"
-      style={[styles.text, { color: colors.grayscale1 }, style]}
+      style={[styles.text, { color: colors.text }, style]}
       {...props}
     />
   );

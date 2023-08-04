@@ -10,7 +10,7 @@ export default function RootNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: colors.backgrounds.grayscale5 },
+        headerStyle: { backgroundColor: colors.backgrounds.default },
       }}
     >
       <Stack.Screen

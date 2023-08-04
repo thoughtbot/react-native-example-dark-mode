@@ -1,26 +1,26 @@
 const colors: Record<ColorThemeName, ThemeColors> = {
   light: {
-    grayscale1: '#222',
-    grayscale2: '#454547',
-    grayscale4: '#ddd',
-    grayscale5: '#fff',
+    text: '#222',
+    textMuted: '#454547',
+    textLight: '#fff',
     backgrounds: {
-      grayscale1: '#29292c',
-      grayscale2: '#565656',
-      grayscale5: '#fff',
+      default: '#fff',
+      soft: '#e0e0e4',
+      strong: '#555',
       primary: '#e03131',
+      inverted: '#29292c',
     },
   },
   dark: {
-    grayscale1: '#fff',
-    grayscale2: '#888',
-    grayscale4: '#454547',
-    grayscale5: '#29292c',
+    text: '#fff',
+    textMuted: '#ccc',
+    textLight: '#fff',
     backgrounds: {
-      grayscale1: '#fff',
-      grayscale2: '#eee',
-      grayscale5: '#29292c',
+      default: '#29292c',
+      soft: '#565659',
+      strong: '#aaa',
       primary: '#e03131',
+      inverted: '#fff',
     },
   },
 };
@@ -28,22 +28,18 @@ const colors: Record<ColorThemeName, ThemeColors> = {
 export default colors;
 
 export type ThemeColors = {
-  /** darkest color. In dark mode, is lightest */
-  grayscale1: string;
-  grayscale2: string;
-  grayscale4: string;
-  /** lightest color. In dark mode, is darkest */
-  grayscale5: string;
+  text: string;
+  textMuted: string;
+  textLight: string;
   backgrounds: {
-    /** darkest color. In dark mode, is lightest */
-    grayscale1: string;
-    grayscale2: string;
-    /** lightest color. In dark mode, is darkest */
-    grayscale5: string;
+    /** white in light mode, dark in dark mode */
+    default: string;
+    soft: string;
+    /** dark in light mode, light in dark mode */
+    strong: string;
     primary: string;
+    inverted: string;
   };
 };
 
-export type BaseColorName = keyof Omit<ThemeColors, 'backgrounds'>;
-export type BackgroundColorName = keyof ThemeColors['backgrounds'];
 export type ColorThemeName = 'light' | 'dark';
